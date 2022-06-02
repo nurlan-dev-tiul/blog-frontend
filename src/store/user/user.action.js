@@ -1,5 +1,5 @@
-import { setUserDetails, followUser, unFollowUser, setPhotoActionCreator } from "./actions/action.creators";
-import { followUserApi, getUserApi, unFollowUserApi, addUserPhotoApi } from "services/user/userApi";
+import { setUserDetails, followUser, unFollowUser, setPhotoActionCreator,setEditUserActionCreator } from "./actions/action.creators";
+import { followUserApi, getUserApi, unFollowUserApi, addUserPhotoApi, editUserApi } from "services/user/userApi";
 import { closeAlertActionCreator, errorAlertActionCreator } from "store/alert/alert.action";
 
 //! Получаем пользователя
@@ -70,4 +70,22 @@ export const addProfilePhotoAction = (avatar) => async (dispatch, getState) => {
         dispatch(errorAlertActionCreator(error?.response?.data?.message))
     }
 }
+
+//! Редактирование пользователя
+export const editUserAction = (user) => async (dispatch, getState) => {
+    const { showAlertMessage } = getState().alert;
+    try {
+        const { data } = await editUserApi(user);
+
+         //! Dispatch in store
+        dispatch(setEditUserActionCreator(data));
+
+        if(showAlertMessage){
+            dispatch(closeAlertActionCreator());
+        }
+    } catch (error) {
+        dispatch(errorAlertActionCreator(error?.response?.data?.message))
+    }
+}
+
 

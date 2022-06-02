@@ -10,13 +10,13 @@ import Register from "pages/Auth/Register";
 import ArticlePage from "pages/Article";
 import CreatePost from "pages/CreatePost";
 import Profile from "pages/Profile";
+import CategoryPage from "pages/Category";
 import { useDispatch } from "react-redux";
 import { Global } from '@emotion/react';
 import { Layout } from "components/Layout";
 import { GlobalStyle } from "styles/global";
 import { PrivateRoute } from "components/PrivateRoute";
 import { getProfileAction } from "store/auth/auth.action";
-
 
 const App = () => {
 
@@ -42,6 +42,7 @@ const App = () => {
               </PrivateRoute>
             } />
             <Route path='/detail/:id' element={<ArticlePage />} />
+            <Route path='/category/:id' element={<CategoryPage />} />
             <Route path='/profile/:id' element={<Profile />} />
           </Route>
         </Routes>

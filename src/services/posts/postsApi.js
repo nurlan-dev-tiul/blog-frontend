@@ -4,12 +4,12 @@ export const createPostApi = async (data) => {
     return await apiClient.post('/posts/create', data);
 }
 
-export const getPostsByCategoryApi= async (category) => {
-    return await apiClient.get(`/posts?category=${category}`);
+export const getPostsByCategoryApi= async (categoryId, page) => {
+    return await apiClient.get(`/posts/category/${categoryId}?page=${page}`);
 }
 
-export const getPostsApi= async () => {
-    return await apiClient.get('/posts');
+export const getPostsApi= async (pages) => {
+    return await apiClient.get(`/posts?page=${pages}`);
 }
 
 export const getSinglePostApi= async (postId) => {

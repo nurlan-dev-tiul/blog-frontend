@@ -1,50 +1,40 @@
 import React from 'react';
-import { PopularPostList } from 'components/Posts/PopularPost';
-import { Post } from 'components/Posts/Post';
-import { Category } from 'components/Category';
-import { Wrapper, AsideBox } from 'styles/global';
 import { useDispatch, useSelector } from 'react-redux';
+import { Post } from 'components/Posts/Post';
+import { PaginationComponent } from 'components/Pagination';
+import { PostLayout } from 'components/Posts/PostLayout';
 import { getPostsAction } from 'store/posts/posts.action';
 import { useSearchParams } from 'react-router-dom';
-import { firstLetterUpperCase } from 'utils/withStrings/workingWithString';
 import {
     MainContainer,
     PostsBox,
 } from './Home.styles';
 
+
 const Home = () => {
     const [searchParams] = useSearchParams();
     const dispatch = useDispatch();
-    const { posts, postLikes } = useSelector(state => state.posts);
-    const category = searchParams.get('category');
-    const categ = firstLetterUpperCase(category);
+    const { posts, postLikes, totalPages } = useSelector(state => state.posts);
+    const pages = searchParams.get('page') || 1;
 
     React.useEffect(() => {
-        if(category){
-            dispatch(getPostsAction(categ))
+        if(pages){
+            dispatch(getPostsAction(pages))
         }else{
             dispatch(getPostsAction())
         }
-        
-    }, [dispatch, category, postLikes])
-
-
+    }, [dispatch, postLikes, pages])
 
     return (
-        <MainContainer>
-            <PopularPostList postListGrid />
-            <Wrapper>
-                <PostsBox>
-                    {posts?.map(post => (
-                        <Post key={post._id} {...post} />
-                    ))}
-                    
-                </PostsBox>
-                <AsideBox>
-                    <Category />
-                </AsideBox>
-            </Wrapper>
-        </MainContainer>
+        <PostLayout>
+            {posts?.map(post => (
+                <Post key={post._id} {...post} />
+            ))}
+            <PaginationComponent 
+                pages={pages}
+                pagesNumber={totalPages}
+            />
+        </PostLayout>
     )
 }
 

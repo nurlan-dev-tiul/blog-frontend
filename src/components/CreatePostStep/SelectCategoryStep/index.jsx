@@ -27,7 +27,7 @@ export const SelectCategoryStep = () => {
                 {categories?.map(category => (
                     <MenuItem 
                         key={category._id}
-                        value={category.title}
+                        value={category._id}
                     >
                         {category.title}
                     </MenuItem>

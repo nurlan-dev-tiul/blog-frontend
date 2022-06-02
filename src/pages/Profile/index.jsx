@@ -15,23 +15,25 @@ const Profile = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
 
-    const { user, followed, unfollowed, photoProfile } = useSelector(state => state.user);
+    const { user, followed, unfollowed, photoProfile, editUserSuccess } = useSelector(state => state.user);
     const { postLikes } = useSelector(state => state.posts);
+    const { userDetails } = useSelector(state => state.auth);
 
     React.useEffect(() => {
         dispatch(getUserAction(id))
-    }, [id, dispatch, postLikes, followed, unfollowed, photoProfile])
+    }, [id, dispatch, postLikes, followed, unfollowed, photoProfile, editUserSuccess])
 
     return (
         <>
-            <UserInfo {...user}/>
+            <UserInfo {...user} id={id}/>
             <Container>
                 <Content>
                     {user?.posts.map(post => (
                         <Post 
                             key={post._id}
                             {...post}
-                            hideAuthor
+                            userInfo={user}
+                            isAuthor={userDetails?._id === id}
                         />
                     ))}
                     

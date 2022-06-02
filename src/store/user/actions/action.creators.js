@@ -32,4 +32,11 @@ export const setPhotoActionCreator = (image) => {
     }
 }
 
+//! Action Creators загрузка фото пользователя
+export const setEditUserActionCreator = (user) => {
+    return {
+        type: userAction.SET_EDIT_USER,
+        payload: user
+    }
+}
 

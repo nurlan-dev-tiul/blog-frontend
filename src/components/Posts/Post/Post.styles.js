@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { Link } from 'react-router-dom';
 import { authorMixin, userImageBox } from 'styles/mixin';
 import { colors } from 'styles/variables';
@@ -22,6 +24,7 @@ export const RecentPost = styled.div`
 export const ImagePostBox = styled.div`
     width: 35%;
     height: auto;
+    position: relative;
 
     @media (max-width: 1228px) {
         width: 30%;
@@ -39,6 +42,19 @@ export const ImagePostBox = styled.div`
         width: 100%;
         height: 300px;
     }
+`;
+
+export const CategoryText = styled.h6`
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: cadetblue;
+    z-index: 100;
 `;
 
 export const ImagePost = styled.img`
@@ -129,6 +145,19 @@ export const AuthorImage = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
+`;
+
+export const EditIcon = styled(EditOutlinedIcon)`
+    margin-right: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    color: ${gray};
+`;
+
+export const DeleteIcon = styled(DeleteOutlineOutlinedIcon)`
+    font-size: 22px;
+    cursor: pointer;
+    color: ${gray};
 `;
 
 

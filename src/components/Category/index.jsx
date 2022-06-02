@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { getCategoriesAction } from 'store/category/category.action';
-import { getPostsAction } from 'store/posts/posts.action';
+import { getPostsAction, getPostsByCategoryAction } from 'store/posts/posts.action';
 import {
     CategoryBox,
     UlCategory,
@@ -21,13 +21,17 @@ export const Category = () => {
         dispatch(getCategoriesAction());
     }, [dispatch])
 
+    const getCategoryPosts = (id) => {
+        dispatch(getPostsByCategoryAction({categoryId: id}))
+    }
+
     return (
         <CategoryBox>
             <UlCategory>
                 {
                     categories?.map((category, index) => (
                     <ListCategory key={index}>
-                        <CategItem to={`/?category=${category.title.toLowerCase()}`}>
+                        <CategItem to={`/category/${category._id}`}>
                             {category.title}
                         </CategItem>
                     </ListCategory>

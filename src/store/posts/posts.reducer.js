@@ -2,6 +2,9 @@ import { postsAction } from "./actions/action.types"
 
 const initialState = {
     posts: [],
+    categoryPosts: [],
+    totalPages: null,
+    limit: 0,
     post: null,
     postLikes: null,
     loading: false
@@ -17,9 +20,20 @@ export const postsReducer = (state=initialState, action) => {
         case postsAction.SET_ALL_POSTS:
             return{
                 ...state,
-                posts: action.payload,
-                loading: false
+                posts: action.payload.docs,
+                totalPages: action.payload.totalPages,
+                limit: action.payload.limit,
+                loading: false,
             }
+        // case postsAction.SET_POSTS_BY_CATEGORY:
+        //     return{
+        //         ...state,
+        //         categoryPosts: action.payload.posts,
+        //         currentPage: action.payload.currentPages,
+        //         numberOfPages: action.payload.numberOfPage,
+        //         loading: false,
+        //         posts: []
+        //     }
         case postsAction.SET_POST_LIKES:
             return{
                 ...state,

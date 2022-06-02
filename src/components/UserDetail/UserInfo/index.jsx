@@ -21,7 +21,7 @@ import { followUserAction, unFollowUserAction } from 'store/user/user.action';
 import { Modal } from 'components/Modal';
 import { Subscriptions } from '../Subscriptions';
 import { EditProfile } from '../EditProfile';
-
+import { useParams } from 'react-router-dom';
 
 export const UserInfo = (props) => {
     const {
@@ -39,7 +39,10 @@ export const UserInfo = (props) => {
     const [openEditProfile, setOpenEditProfile] = React.useState(false);
     const dispatch = useDispatch();
 
+    const { id } = useParams()
+
     const { userDetails } = useSelector(state => state.auth);
+    const { user } = useSelector(state => state.user);
     const isAuth = userDetails?._id === userId;
 
     const handleCloseFollowersModal = () => {
@@ -91,11 +94,11 @@ export const UserInfo = (props) => {
                             >
                                 Редактировать
                             </Button>
-                        ) : isFollowing ? (
+                        ) : user?.isFollowing ? (
                             <Button 
                                 variant='outlined' 
                                 color='primary'
-                                onClick={() => dispatch(unFollowUserAction(userId))}
+                                onClick={() => dispatch(unFollowUserAction(id))}
                             >
                                 Отписаться
                             </Button>
@@ -103,7 +106,7 @@ export const UserInfo = (props) => {
                             <Button 
                                 variant='contained' 
                                 color='primary'
-                                onClick={() => dispatch(followUserAction(userId))}
+                                onClick={() => dispatch(followUserAction(id))}
                             >
                                 Подписаться
                             </Button>
@@ -133,6 +136,7 @@ export const UserInfo = (props) => {
                 />
             </Modal>
             <Modal 
+                headerTitle='Редактировать профиль'
                 onClose={handleCloseEditModal}
                 open={openEditProfile}
                 fullWidth
@@ -141,6 +145,7 @@ export const UserInfo = (props) => {
                     firstName={firstName}
                     email={email}
                     image={profilePhoto}
+                    selectedValueClose={handleCloseEditModal}
                 />
             </Modal>
         </Wrapper>

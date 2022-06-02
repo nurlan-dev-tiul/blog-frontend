@@ -4,7 +4,8 @@ import {
     newPostActionCreator, 
     setAllPostsActionCreator, 
     setSinglePostActionCreator,
-    setPostLikesActionCreators
+    setPostLikesActionCreators,
+    setPostsByCategoryActionCreator
 } from "./actions/action.creators";
 
 
@@ -26,20 +27,29 @@ export const createPostAction = (newPost, navigate) => async(dispatch, getState)
 }
 
 //! Получение всех постов
-export const getPostsAction = (category) => async(dispatch, getState) => {
+export const getPostsAction = (pages) => async(dispatch, getState) => {
     const { showAlertMessage } = getState().alert;
     try {
-        if(category){
-            const { data } = await getPostsByCategoryApi(category);
-            dispatch(setAllPostsActionCreator(data));
+        const { data } = await getPostsApi(pages);
+        dispatch(setAllPostsActionCreator(data))
 
-            if(showAlertMessage){
-                dispatch(closeAlertActionCreator());
-            }
-        } else {
-                const { data } = await getPostsApi();
-                dispatch(setAllPostsActionCreator(data))
+    } catch (error) {
+        dispatch(errorAlertActionCreator(error?.response?.data?.message))
+    }
+}
+
+//! Получение всех постов
+export const getPostsByCategoryAction = (categoryId, pages) => async(dispatch, getState) => {
+    const { showAlertMessage } = getState().alert;
+    try {
+
+        const { data } = await getPostsByCategoryApi(categoryId, pages);
+        dispatch(setAllPostsActionCreator(data));
+
+        if(showAlertMessage){
+            dispatch(closeAlertActionCreator());
         }
+
     } catch (error) {
         dispatch(errorAlertActionCreator(error?.response?.data?.message))
     }

@@ -16,14 +16,17 @@ import { Views } from './Views';
 export const LikeAndView = React.memo(({postId, numViews, date, likes}) => {
 
     const dispatch = useDispatch();
-
+    const [isLiked, setIsLiked] = React.useState(false)
     const { posts } = useSelector(state => state.posts);
     const { userDetails } = useSelector(state => state.auth);
-    const isLiked = likes?.includes(userDetails?._id);
 
     const handleLike = () => {
         dispatch(setPostLikesAction(postId))
     }
+
+    React.useEffect(() => {
+        setIsLiked(likes?.includes(userDetails?._id));
+    }, [likes])
 
     return (
         <PostLikeAndView>

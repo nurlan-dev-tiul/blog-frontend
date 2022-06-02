@@ -15,6 +15,13 @@ export const setAllPostsActionCreator = (posts) => {
     }
 }
 
+export const setPostsByCategoryActionCreator = (posts) => {
+    return {
+        type: postsAction.SET_POSTS_BY_CATEGORY,
+        payload: posts
+    }
+}
+
 export const setPostLikesActionCreators = (post) => {
     return {
         type: postsAction.SET_POST_LIKES,

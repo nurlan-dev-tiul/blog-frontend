@@ -2,9 +2,10 @@ import { userAction } from "./actions/action.types";
 
 const initialState = {
     user: null,
-    followed: undefined,
-    unfollowed: undefined,
+    followed: null,
+    unfollowed: null,
     photoProfile: null,
+    editUserSuccess: false,
     loading: false
 }
 
@@ -19,7 +20,10 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload,
-                loading: false
+                loading: false,
+                editUserSuccess: false,
+                followed: null,
+                unfollowed: null,
             }
         case userAction.FOLLOWED:
             return {
@@ -39,6 +43,12 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 photoProfile: action.payload,
+                loading: false
+            }
+        case userAction.SET_EDIT_USER:
+            return {
+                ...state,
+                editUserSuccess: true,
                 loading: false
             }
         default:

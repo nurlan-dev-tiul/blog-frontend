@@ -16,14 +16,14 @@ import {
     Label,
     Input
 } from './EditProfile.styles';
-import { addProfilePhotoAction } from 'store/user/user.action';
+import { addProfilePhotoAction, editUserAction } from 'store/user/user.action';
 
 
-export const EditProfile = ({firstName, image, email}) => {
+export const EditProfile = ({firstName, image, email, selectedValueClose}) => {
 
     const [avatar, setAvatar] = React.useState(null);
     const dispatch = useDispatch();
-    const { photoProfile } = useSelector(state => state.user);
+    const { photoProfile, editUserSuccess } = useSelector(state => state.user);
 
     //! React-hook-form и схема валидации
     const form = useForm({
@@ -44,14 +44,20 @@ export const EditProfile = ({firstName, image, email}) => {
     }
 
     const updateUserInfo = (data) => {
-        console.log(data)
+        dispatch(editUserAction(data));
     }
 
     React.useEffect(() => {
         if(photoProfile){
             setAvatar(null)
         }
-    }, [photoProfile])
+    }, [photoProfile]);
+
+    React.useEffect(() => {
+        if(editUserSuccess){
+            selectedValueClose();
+        }
+    }, [editUserSuccess])
 
     return (
         <ModalBox>

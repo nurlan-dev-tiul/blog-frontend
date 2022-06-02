@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
-export const AppBarComponent = ({onClose}) => {
+export const AppBarComponent = ({onClose, headerTitle}) => {
     return (
         <AppBar sx={{ position: 'relative' }}>
             <Toolbar>
@@ -17,7 +17,7 @@ export const AppBarComponent = ({onClose}) => {
                     <CloseIcon />
                 </IconButton>
                 <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                    Редактировать профиль
+                    {headerTitle}
                 </Typography>
             </Toolbar>
         </AppBar>

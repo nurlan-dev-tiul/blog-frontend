@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export const Modal = (props) => {
-    const {  open, children, title, onClose, fullWidth } = props;
+    const {  open, children, title, onClose, fullWidth, headerTitle } = props;
 
     if(fullWidth){
         return (
@@ -32,7 +32,7 @@ export const Modal = (props) => {
             TransitionComponent={Transition}
             fullScreen
         >
-            <AppBarComponent onClose={onClose}/>
+            <AppBarComponent onClose={onClose} headerTitle={headerTitle} />
             <DialogTitle>{title}</DialogTitle>
                 {children}
             </Dialog>
