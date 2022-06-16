@@ -1,7 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { dateFormat } from 'utils/momentDate';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
+import { setPostLikesAction } from 'store/posts/posts.action';
+import { Views } from './Views';
 import {
     PostLikeAndView,
     LikeBox,
@@ -10,23 +12,24 @@ import {
     TimestampBox,
     TimeIcon
 } from './LikeAndView.styles';
-import { setPostLikesAction } from 'store/posts/posts.action';
-import { Views } from './Views';
 
-export const LikeAndView = React.memo(({postId, numViews, date, likes}) => {
+export const LikeAndView = ({postId, numViews, date, likes}) => {
+
+    const [isLiked, setIsLiked] = React.useState(false);
 
     const dispatch = useDispatch();
-    const [isLiked, setIsLiked] = React.useState(false)
-    const { posts } = useSelector(state => state.posts);
+
     const { userDetails } = useSelector(state => state.auth);
 
+    //! Сохраняем лайк
     const handleLike = () => {
         dispatch(setPostLikesAction(postId))
     }
 
+    //! Если в массиве лайков есть наш id тогда состояние будет true
     React.useEffect(() => {
         setIsLiked(likes?.includes(userDetails?._id));
-    }, [likes])
+    }, [likes, postId, userDetails])
 
     return (
         <PostLikeAndView>
@@ -45,4 +48,4 @@ export const LikeAndView = React.memo(({postId, numViews, date, likes}) => {
             </TimestampBox>
         </PostLikeAndView>
     )
-})
+}

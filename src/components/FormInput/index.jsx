@@ -1,15 +1,14 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Box } from '@mui/material';
+import { OneLineInput } from './OneLineInput';
+import { MultiLineInput } from './TextArea';
+import { SelectInput } from './SelectInput';
 import { 
     InputContainer,
     LabelContainer,
     FormLabel, 
     ErrorText
 } from './FormInput.styles';
-import { OneLineInput } from './OneLineInput';
-import { MultiLineInput } from './TextArea';
-import { SelectInput } from './SelectInput';
 
 export const FormInput = ({name, label, type, rows, multiline, oneliner, select, children}) => {
 

@@ -47,5 +47,13 @@ export const ModalBox = styled.div`
     margin: 15px auto;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+
+    @media (max-width: 950px) {
+        width: 60%;
+    }
+
+    @media (max-width: 650px) {
+        width: 90%;
+    }
 `;
 

@@ -3,25 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getUserAction } from 'store/user/user.action';
 import { Post } from 'components/Posts/Post';
-import { Subscriptions } from 'components/UserDetail/Subscriptions';
 import { UserInfo } from 'components/UserDetail/UserInfo';
 import {
     Container,
-    Sidebar,
     Content
 } from './Profile.styles';
+import { tabTitle } from 'utils/tabTitle';
 
 const Profile = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-
-    const { user, followed, unfollowed, photoProfile, editUserSuccess } = useSelector(state => state.user);
-    const { postLikes } = useSelector(state => state.posts);
+    
+    const { user, photoProfile, editSuccess } = useSelector(state => state.user);
+    const { postLikes, deleted, editedPost } = useSelector(state => state.posts);
     const { userDetails } = useSelector(state => state.auth);
 
     React.useEffect(() => {
         dispatch(getUserAction(id))
-    }, [id, dispatch, postLikes, followed, unfollowed, photoProfile, editUserSuccess])
+    }, [dispatch, id, postLikes, photoProfile, editSuccess, deleted, editedPost]);
+
+    const username = user?.firstName;
+
+    //Change Document Title
+    tabTitle(username + '- Страница профиля')
+
 
     return (
         <>
@@ -32,6 +37,7 @@ const Profile = () => {
                         <Post 
                             key={post._id}
                             {...post}
+                            postId={post._id}
                             userInfo={user}
                             isAuthor={userDetails?._id === id}
                         />

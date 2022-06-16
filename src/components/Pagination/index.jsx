@@ -3,15 +3,11 @@ import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPostsAction, getPostsByCategoryAction } from 'store/posts/posts.action';
 import {
     Container
 } from './Pagination.styles';
 
-export const PaginationComponent = ({pages, categoryId, isCategory, pagesNumber}) => {
-
-    // const { numberOfPages } = useSelector(state => state.posts);
+export const PaginationComponent = ({pages, categoryId, isCategory, pagesNumber, scrollHandle}) => {
 
     return (
         <Container>
@@ -24,7 +20,12 @@ export const PaginationComponent = ({pages, categoryId, isCategory, pagesNumber}
                         shape="rounded"
                         siblingCount={0} 
                         renderItem={(item) => (
-                            <PaginationItem {...item} component={Link} to={`/category/${categoryId}?page=${item.page}`} />
+                            <PaginationItem 
+                                {...item}
+                                component={Link}
+                                onClick={() => scrollHandle()}
+                                to={`/category/${categoryId}?page=${item.page}`} 
+                            />
                         )}
                     />
                 ) : (
@@ -35,7 +36,12 @@ export const PaginationComponent = ({pages, categoryId, isCategory, pagesNumber}
                         shape="rounded"
                         siblingCount={0}
                         renderItem={(item) => (
-                            <PaginationItem {...item} component={Link} to={`/?page=${item.page}`} />
+                            <PaginationItem 
+                                {...item} 
+                                component={Link}
+                                onClick={() => scrollHandle()}
+                                to={`/?page=${item.page}`} 
+                            />
                         )}
                     />
                 )}

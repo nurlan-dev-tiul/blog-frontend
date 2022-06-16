@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import {
     StepBody,
@@ -14,38 +14,45 @@ import {
 } from '../CreatePostStep.styles';
 
 export const UploadImageStep = () => {
-    const [image, setImage] = React.useState(null);
+    const [img, setImage] = React.useState(null);
+    const [previewImg, setPreviewImg] = React.useState(null);
+
+    //! React-hook-form context
     const { formState, register } = useFormContext();
 
-    const handleChange = (e) => {
+    //! Функция для превью картинки
+    const handleChange =  (e) => {
         const selectedFile = e.target.files[0];
-        const previewImage = URL.createObjectURL(selectedFile)
-        setImage(previewImage)
+        const previewImage = URL.createObjectURL(selectedFile);
+        setPreviewImg(previewImage);
+        setImage(selectedFile);
     }
-
     return (
         <StepBody>
             <Container>
                 <ImageContainer>
-                    {image ? (
-                        <PreviewImage src={image} />
+                    {previewImg ? (
+                        <PreviewImage src={previewImg} />
                     ) : (
                         <ImageIcon src="https://cdn.pixabay.com/photo/2016/12/18/13/45/download-1915753_960_720.png" alt="" />
                     )}
                     
                     <InputContainer>
                         <LabelInput htmlFor="contained-button-file">
-                            <ImageInput
-                                {...register('image')} 
-                                accept="image/*" 
-                                id="contained-button-file" 
-                                multiple 
-                                type="file"
-                                name='image' 
-
-                            />
-                            <Button variant={image ? 'contained' : 'outlined'} component="span">
-                                Загрузить картинку
+                                <ImageInput
+                                    {...register('image', {
+                                        onChange: handleChange
+                                    })}
+                                    accept="image/*" 
+                                    id="contained-button-file" 
+                                    multiple 
+                                    type="file"
+                                    name='image'
+                                    
+                            /> 
+                            
+                            <Button variant={img ? 'contained' : 'outlined'} component="span">
+                                {img ? 'Загрузить другую картинку' : 'Загрузить картинку'}
                             </Button>
                         </LabelInput>
                     </InputContainer> 

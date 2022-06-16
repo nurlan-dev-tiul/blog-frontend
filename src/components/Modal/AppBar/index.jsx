@@ -4,7 +4,9 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
+
 export const AppBarComponent = ({onClose, headerTitle}) => {
+    
     return (
         <AppBar sx={{ position: 'relative' }}>
             <Toolbar>

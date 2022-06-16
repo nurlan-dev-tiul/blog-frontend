@@ -1,4 +1,4 @@
-import { closeAlertActionCreator, errorAlertActionCreator } from "store/alert/alert.action";
+import { errorAlertActionCreator } from "store/alert/alert.action";
 import { createCommentApi, removeCommentApi } from "services/comment/commentApi";
 
 export const commentAction = {

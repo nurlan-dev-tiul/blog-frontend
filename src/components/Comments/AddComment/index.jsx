@@ -1,17 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux'; 
 import TextField from '@mui/material/TextField';
+import { useDispatch } from 'react-redux'; 
+import { createCommentAction } from 'store/comment/comment.action';
 import {
     MainContainer,
     CreateBtn
 } from './AddComment.styles';
-import { createCommentAction } from 'store/comment/comment.action';
 
 export const AddComment = ({postId}) => {
 
     const [comment, setComment] = React.useState('');
     const dispacth = useDispatch();
 
+    //! Отправляем на сервер новый комментарии
     const createComment = () => {
         const data = {
             postId,

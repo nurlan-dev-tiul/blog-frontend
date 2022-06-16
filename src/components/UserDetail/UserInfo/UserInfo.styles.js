@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
         height: auto;
     }
     @media (max-width: 834px) {
-        height: 500px;
+        height: 400px;
     }
 `;
 
@@ -41,7 +41,7 @@ export const UserBackground = styled.img`
     box-sizing: border-box;
     margin-left: 0px !important;
     @media (max-width: 834px) {
-        height: 500px;
+        height: 400px;
     }
 `;
 
@@ -65,7 +65,10 @@ export const ProfileBox = styled.div`
 
     @media (max-width: 980px) {
         display: flex;
-
+        border-top-left-radius: 22px;
+        border-top-right-radius: 22px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
     @media (max-width: 834px) {
         width: 50%;
@@ -128,11 +131,17 @@ export const ProfileInfo = styled.div`
     }
 `;
 
+export const UserInfoWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 export const FullName = styled(Typography)`
     color: #3F434A;
     font-style: normal;
     font-weight: 700;
     font-size: 23px;
+
     @media (max-width: 980px) {
         font-weight: 700;
         font-size: 19px;
@@ -145,11 +154,13 @@ export const FullName = styled(Typography)`
 
 export const InfoText = styled(Typography)`
     color: #8A9099;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
+    margin-left: 10px;
+    margin-top: 2px;
 `;
 
-export const SubscriptionInfo = styled.div`
+export const PostsLength = styled.div`
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;

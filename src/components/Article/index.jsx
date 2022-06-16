@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { LikeAndView } from 'components/LikeAndView';
 import { Image } from 'styles/global';
 import {
@@ -15,7 +14,7 @@ import {
 
 export const Detail = (props) => {
 
-    const {_id, likes, title, description, image, user, numViews, isLiked, createdAt} = props
+    const {_id, likes, title, description, image, user, numViews, isLiked, createdAt} = props;
 
     return (
         <>

@@ -2,12 +2,12 @@ import { postsAction } from "./actions/action.types"
 
 const initialState = {
     posts: [],
-    categoryPosts: [],
     totalPages: null,
     limit: 0,
     post: null,
     postLikes: null,
-    loading: false
+    loading: false,
+    editedPost: false,
 }
 
 export const postsReducer = (state=initialState, action) => {
@@ -25,15 +25,6 @@ export const postsReducer = (state=initialState, action) => {
                 limit: action.payload.limit,
                 loading: false,
             }
-        // case postsAction.SET_POSTS_BY_CATEGORY:
-        //     return{
-        //         ...state,
-        //         categoryPosts: action.payload.posts,
-        //         currentPage: action.payload.currentPages,
-        //         numberOfPages: action.payload.numberOfPage,
-        //         loading: false,
-        //         posts: []
-        //     }
         case postsAction.SET_POST_LIKES:
             return{
                 ...state,
@@ -50,6 +41,24 @@ export const postsReducer = (state=initialState, action) => {
             return{
                 ...state,
                 post: action.payload
+            }
+        case postsAction.SET_EDIT_POST:
+            return{
+                ...state,
+                post: action.payload,
+                editedPost: true,
+                loading: false
+            }
+        case postsAction.EDITED_POST:
+            return{
+                ...state,
+                editedPost: false
+            }
+        case postsAction.DELETE_POST:
+            return{
+                ...state,
+                posts: state.posts.filter((obj) => obj._id !== action.payload),
+                deleted: action.payload
             }
         default:
             return state;

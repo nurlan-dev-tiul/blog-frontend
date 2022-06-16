@@ -1,27 +1,7 @@
 import { loginApi, registerApi, getProfileApi } from "services/auth/authApi";
 import { closeAlertActionCreator, errorAlertActionCreator } from "store/alert/alert.action";
-
-//! Константы Action
-export const authAction = {
-    SET_USER_DETAILS: 'AUTH.SET_USER_DETAILS',
-    LOGOUT_USER: 'AUTH.LOGOUT_USER',
-    LOADING: 'AUTH.LODAING'
-}
-
-//! Action Creators
-export const setUserDetails = (userDetails) => {
-    return {
-        type: authAction.SET_USER_DETAILS,
-        payload: userDetails
-    }
-}
-
-//! Action Creators
-export const loadingActionCreators = () => {
-    return {
-        type: authAction.LOADING,
-    }
-}
+import { setUserDetails, loadingActionCreators } from "./actions/action.creators";
+import { authAction } from "./actions/action.types";
 
 //! Action thunk запрос на сервер на получение регистрации и отправка данных в store
 export const registerAction = (newUser) => async (dispatch, getState) => {

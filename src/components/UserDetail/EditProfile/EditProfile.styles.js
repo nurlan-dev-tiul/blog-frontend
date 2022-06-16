@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
 
 export const Container = styled.div`
     padding: 0px 60px;
@@ -20,9 +21,12 @@ export const LabelContainer = styled.div`
     right: 0;
     text-align: center;
     width: 100%;
-    background-color: rgba(0, 0, 0, .2);
     padding-bottom: 10px;
 `;
+
+export const SaveImgBTN = styled(Button)`
+    margin-bottom: 20px;
+`;  
 
 export const Label = styled.label`
     z-index: 100px;

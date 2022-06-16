@@ -1,15 +1,20 @@
 import styled from '@emotion/styled';
-import ManageSearchOutlinedIcon from '@mui/icons-material/ManageSearchOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import ToggleIconMenu from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { authorMixin, userImageBox } from 'styles/mixin';
 import { Link } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { Button } from '@mui/material';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 
 export const HeaderBox = styled.div`
+    position: sticky;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 300;
     width: 100%;
-    padding: 22px 0px;
+    height: 78px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,23 +40,60 @@ export const MenuBox = styled.div`
     align-items: center;
 `;
 
-export const SearchIcon = styled(ManageSearchOutlinedIcon)`
-    font-size: 32px;
+export const ToggleBTN = styled.button`
     cursor: pointer;
-    color: #595959;
-    margin-left: 10px;
+    display: none;
+    padding: 0px;
+    margin-right: -6px;
+    border: none;
+    background-color: transparent;
+    @media (max-width: 600px) {
+        display: block;
+    }
 `;
 
-export const MenuItem = styled(Typography)`
+export const MenuIconeBTN = styled(ToggleIconMenu)`
+    cursor: pointer;
+    font-size: 30px;
+
+    z-index: 100;
+`;
+
+export const CloseIconBTN = styled(CloseIcon)`
+    cursor: pointer;
+    font-size: 30px;
+
+    z-index: 100;
+`;
+
+export const CreatePostBTN = styled(Button)`
+    z-index: 300;
+    @media (max-width: 600px) {
+        display: none;
+    }
+`;
+
+export const DropdownMenu = styled.div`
+    @media (max-width: 600px) {
+        display: none;
+    }
+`;
+
+
+export const MenuItemIcon = styled(HomeRoundedIcon)`
     margin-left: 10px;
-    font-size: 17px;
+    font-size: 28px;
     color: #595959;
-    font-weight: 600;
+
 `;
 
 export const MenuLink = styled(Link)`
     display: flex;
     align-items: center;
+
+    @media (max-width: 600px) {
+        display: none;
+    }
 `;
 
 export const AuthIcon = styled(AccountCircleOutlinedIcon)`
@@ -70,9 +112,9 @@ export const UserBox = styled.div`
 
 export const AuthorImageBox  = styled.div`
     ${userImageBox}
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
+    width: ${props => props.lWidth ? '70px' : '30px'};
+    height: ${props => props.lWidth ? '70px' : '30px'};
+    margin: ${props => props.lWidth ? '0px auto' : '0px 0px 0px 10px'};;
 `;
 
 export const PostAuthor = styled.span`

@@ -3,13 +3,14 @@ import Alert from '@mui/material/Alert';
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { FormInput } from 'components/FormInput';
 import { AuthWrapper } from 'components/Auth';
 import { registerSchemaValidation } from 'utils/validateSchema/authSchema';
 import { registerAction } from 'store/auth/auth.action';
 import { alertMessage } from 'store/alert/auth.selectors';
+import { tabTitle } from 'utils/tabTitle';
 import { 
     FormFooter,
     RegisterLink,
@@ -22,18 +23,24 @@ const Register = () => {
     const {errorMessage, showAlertMessage} = useSelector(alertMessage);
     const { isAuth } = useSelector(state => state.auth);
     
+    //! REact-hook-form
     const form = useForm({
         mode: 'onSubmit',
         resolver: yupResolver(registerSchemaValidation),
     });
 
+    //! Отправка данных на сервер
     const postRegister = (newUser) => {
         dispatch(registerAction(newUser));
     }
 
+    //! Если авторизован или зарегистрирован то редирект на главную
     if(isAuth){
         return <Navigate to='/' />
     }
+    
+    //Change Document Title
+    tabTitle('Регистрация')
 
     return (
         <>

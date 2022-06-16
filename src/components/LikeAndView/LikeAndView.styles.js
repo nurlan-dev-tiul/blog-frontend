@@ -10,6 +10,12 @@ const { gray } = colors;
 
 export const PostLikeAndView = styled.div`
     display: flex;
+
+    @media (max-width: 630px) {
+        position: absolute;
+        top: 0;
+        margin-top: 15px;
+    }
 `;
 
 export const LikeBox = styled.div`

@@ -3,6 +3,8 @@ export const alertAction = {
     CLOSE_ALERT_MESSAGE: 'ALERT.CLOSE_ALERT_MESSAGE'
 }
 
+
+//! Для ошибок
 export const errorAlertActionCreator = (message) => {
     return {
         type: alertAction.ERROR_ALERT_MESSAGE,
@@ -10,6 +12,7 @@ export const errorAlertActionCreator = (message) => {
     }
 }
 
+ //! Чтобы очистить состояние ошибок
 export const closeAlertActionCreator = () => {
     return {
         type: alertAction.CLOSE_ALERT_MESSAGE,

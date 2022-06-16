@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export const CategoryBox = styled.div`
@@ -20,7 +19,7 @@ export const UlCategory = styled.ul`
 export const ListCategory = styled.li`
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
     list-style: none; 
-    margin-bottom: 1.4rem;
+    margin-bottom: ${props => props.responsive ? '0px' : '1.4rem'};
 `;
 
 export const CategItem = styled(Link)`
@@ -40,4 +39,9 @@ export const CategItem = styled(Link)`
 
 export const Count = styled.span`
     margin-left: 10px;
+`;
+
+export const NotPostsText = styled.h3`
+    text-align: center;
+    margin-top: 20px;
 `;

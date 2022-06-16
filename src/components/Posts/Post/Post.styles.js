@@ -23,7 +23,7 @@ export const RecentPost = styled.div`
 
 export const ImagePostBox = styled.div`
     width: 35%;
-    height: auto;
+    height: 100%;
     position: relative;
 
     @media (max-width: 1228px) {
@@ -33,14 +33,14 @@ export const ImagePostBox = styled.div`
         width: 40%;
     }
     @media (max-width: 991px) {
-        width: 30%;
+        width: 40%;
+        height: 300px;
     }
     @media (max-width: 930px) {
-        width: 30%;
+        width: 40%;
     }
     @media (max-width: 835px) {
         width: 100%;
-        height: 300px;
     }
 `;
 
@@ -66,6 +66,7 @@ export const ImagePost = styled.img`
 export const PostContent = styled.div`
     padding: 25px;
     max-width: 65%;
+    position: relative;
     @media (max-width: 1228px) {
         max-width: 70%;
     }
@@ -81,6 +82,13 @@ export const PostContent = styled.div`
         width: 100%;
         max-width: 100%;
     }
+    @media (max-width: 630px) {
+        padding-top: 45px;
+    }
+    @media (max-width: 400px) {
+        padding: 45px 10px 25px 10px;
+    }
+
 `;
 
 export const PostTitle = styled(Link)`
@@ -92,6 +100,7 @@ export const PostTitle = styled(Link)`
     @media (max-width: 930px) {
         font-size: 20px;
     }
+        
 `;
 
 export const PostDescription = styled.p`

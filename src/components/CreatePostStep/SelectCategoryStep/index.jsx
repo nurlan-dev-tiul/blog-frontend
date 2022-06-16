@@ -5,13 +5,12 @@ import { FormInput } from 'components/FormInput';
 import { StepBody } from '../CreatePostStep.styles';
 import { getCategoriesAction } from 'store/category/category.action';
 
-
-
 export const SelectCategoryStep = () => {
 
     const dispatch = useDispatch();
     const { categories } = useSelector(state => state.category);
 
+    //! Получаем категории для Select-option
     React.useEffect(() => {
         dispatch(getCategoriesAction())
     }, [dispatch])

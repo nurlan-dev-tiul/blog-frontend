@@ -10,7 +10,7 @@ import {
 export const OneLineInput = ({name, type}) => {
 
     const [showPassword, setShowPassword] = React.useState(false);
-    const { formState, register } = useFormContext();
+    const { register } = useFormContext();
 
     return (
         <>

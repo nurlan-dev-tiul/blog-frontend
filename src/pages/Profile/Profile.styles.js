@@ -17,5 +17,9 @@ export const Sidebar = styled.div`
 export const Content = styled.div`
     width: 80%;
     margin: 0 auto;
+    padding-bottom: 25px;
+    @media (max-width: 650px) {
+        width: 100%;
+    }
 `;
 

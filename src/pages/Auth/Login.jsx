@@ -10,6 +10,7 @@ import { AuthWrapper } from 'components/Auth';
 import { loginAction } from 'store/auth/auth.action';
 import { alertMessage } from 'store/alert/auth.selectors';
 import { loginSchemaValidation } from 'utils/validateSchema/authSchema';
+import { tabTitle } from 'utils/tabTitle';
 import { 
     FormFooter,
     RegisterLink,
@@ -20,6 +21,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
+    
     const {errorMessage, showAlertMessage} = useSelector(alertMessage);
     const { isAuth } = useSelector(state => state.auth);
 
@@ -43,6 +45,9 @@ const Login = () => {
     const postLogin = (user) => {
         dispatch(loginAction(user))
     }
+
+    //Change Document Title
+    tabTitle('Войти на сайт')
 
     return (
         <>

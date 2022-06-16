@@ -8,7 +8,6 @@ export const getSingleCommentApi= async (data) => {
     return await apiClient.get('/comments/');
 }
 
-
 export const removeCommentApi= async (id) => {
     return await apiClient.delete(`/comments/${id}`);
 }

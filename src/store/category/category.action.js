@@ -1,5 +1,5 @@
 import { getCategoriesApi } from "services/category/categoryApi";
-import { closeAlertActionCreator, errorAlertActionCreator } from "store/alert/alert.action";
+import { errorAlertActionCreator } from "store/alert/alert.action";
 
 export const categoryAction = {
     SET_CATEGORIES: 'CATEGORY.SET_CATEGORIES',

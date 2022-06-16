@@ -1,35 +1,36 @@
 import React from 'react';
 import Logo from 'assets/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { Button, Typography } from '@mui/material';
-import { Modal } from '../Modal';
+import { Image } from 'styles/global';
+import { ProfileMenu } from '../ProfileMenu';
+import { useSelector } from 'react-redux';
 import {
     HeaderBox,
 	LogoBox,
 	MenuBox,
 	LogoImg,
-	SearchIcon,
+	ToggleBTN,
+	CloseIconBTN,
+	MenuIconeBTN,
 	MenuLink,
-	MenuItem,
+	MenuItemIcon,
+	CreatePostBTN,
 	AuthIcon,
 	UserBox,
 	AuthorImageBox,
 	PostAuthor,
-	
+	DropdownMenu,
 } from './Header.styles';
-import { Image } from 'styles/global';
-import { ProfileMenu } from '../ProfileMenu';
-import { userDetail } from 'store/auth/auth.selector';
-import { useSelector } from 'react-redux';
 
 export const Header = () => {
 
-	const [openSearch, setOpenSearch ] = React.useState(false);
+	const [openMenu, setOpenMenu ] = React.useState(false);
+
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const navigate = useNavigate();
 
-	const { userDetails, isAuth } = useSelector(userDetail);
-
+	const { userDetails, isAuth } = useSelector(state => state.auth);
+	
 	const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -37,8 +38,15 @@ export const Header = () => {
         setAnchorEl(null);
     };
 
-	const handleCloseModal = () => {
-		setOpenSearch(false)
+	//! Для адаптивного меню кнопка открытия и закрытия меню
+	const menuToggleHandler = () => {
+		setOpenMenu(!openMenu)
+	}
+
+	const handleCloseMenu = () => {
+		if(openMenu) {
+			setOpenMenu(false)
+		}
 	}
 
 	return (
@@ -47,22 +55,20 @@ export const Header = () => {
 				<LogoBox>
 					<LogoImg src={Logo} />
 				</LogoBox>
-				<SearchIcon onClick={() => setOpenSearch(true)} />
-				{/* <MenuLink to='/'>
-					<MenuItem>Главная</MenuItem>
-				</MenuLink> */}
+				<MenuLink to='/'>
+					<MenuItemIcon />
+				</MenuLink>
 			</MenuBox>
 			<MenuBox>
-				
-				<Button
+				<CreatePostBTN
 					onClick={() => navigate('/create-post')}
 					variant='contained' 
 					color='success'
 				>
 					Добавить статью
-				</Button>
+				</CreatePostBTN>
 				{isAuth ? (
-					<>
+					<DropdownMenu>
 						<UserBox onClick={handleClick}>
 							<AuthorImageBox>
 								<Image src={userDetails?.profilePhoto} />
@@ -70,12 +76,16 @@ export const Header = () => {
 							<PostAuthor>{userDetails?.email}</PostAuthor>
 						</UserBox>
 						<ProfileMenu anchor={anchorEl} onClose={handleClose}/>
-					</>
+					</DropdownMenu>
 				) : (
 					<MenuLink to='/login'><AuthIcon /></MenuLink>
 				)}
+				<ToggleBTN onClick={menuToggleHandler}>
+					{openMenu ?<CloseIconBTN /> : <MenuIconeBTN />}
+				</ToggleBTN>
+				{/* Adaptive menu */}
+				<ProfileMenu responsiveMenu openMenu={openMenu} handleCloseMenu={handleCloseMenu}/>
 			</MenuBox>
-			<Modal openSearch={openSearch} handleClose={handleCloseModal} />
 		</HeaderBox>
 	)
 }

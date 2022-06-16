@@ -1,9 +1,10 @@
 import React from 'react';
 import { truncateString } from 'utils/withStrings/workingWithString';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { LikeAndView } from 'components/LikeAndView';
 import { EditPost } from '../EditPost';
 import { Modal } from 'components/Modal';
+import { deletePostAction } from 'store/posts/posts.action';
 import {
     RecentPost,
     ImagePostBox,
@@ -22,8 +23,24 @@ import {
     DeleteIcon
 } from './Post.styles';
 
-export const Post = (props) => {
-    const {_id, title, description, image, user, numViews, createdAt, likes, isLiked, isAuthor, category } = props;
+export const Post = React.memo((props) => {
+    const {
+        _id, 
+        postId, 
+        title, 
+        description, 
+        image, 
+        user, 
+        numViews, 
+        createdAt, 
+        likes, 
+        isLiked, 
+        isAuthor, 
+        category, 
+        postLikes,
+    } = props;
+
+    const dispatch = useDispatch();
 
     const [openModal, setOpenModal] = React.useState(false);
 
@@ -51,7 +68,7 @@ export const Post = (props) => {
                         {isAuthor ? (
                             <PostUserBox>
                                 <EditIcon onClick={() => setOpenModal(true)} />
-                                <DeleteIcon />
+                                <DeleteIcon onClick={() => dispatch(deletePostAction(_id))} />
                             </PostUserBox>
                             
                         ) : (
@@ -70,21 +87,27 @@ export const Post = (props) => {
                         date={createdAt} 
                         likes={likes} 
                         isLiked={isLiked}
+                        postLikes={postLikes}
                     />
                 </PostFooter>
             </PostContent>
         </RecentPost>
         <Modal 
-                headerTitle='Редактировать статью'
-                onClose={handleCloseEditModal}
-                open={openModal}
-                fullWidth
-            >
-                <EditPost
-
-                />
+            headerTitle='Редактировать статью'
+            onClose={handleCloseEditModal}
+            open={openModal}
+            fullWidth
+        >
+            <EditPost
+                id={postId}
+                image={image}
+                title={title}
+                description={description}
+                category={category?.title}
+                selectedModalClose={handleCloseEditModal}
+            />
             </Modal>
         </>
     )
-}
+})
 

@@ -1,26 +1,17 @@
 import { userAction } from "./action.types"
 
+//! Action Creators loading
+export const setLoading = () => {
+    return {
+        type: userAction.LOADING,
+    }
+}
+
 //! Action Creators детального пользователя
 export const setUserDetails = (user) => {
     return {
         type: userAction.SET_USER_DETAILS,
         payload: user
-    }
-}
-
-//! Action Creators 
-export const followUser = (message) => {
-    return {
-        type: userAction.FOLLOWED,
-        payload: message
-    }
-}
-
-//! Action Creators
-export const unFollowUser = (message) => {
-    return {
-        type: userAction.UN_FOLLOWED,
-        payload: message
     }
 }
 
@@ -35,7 +26,7 @@ export const setPhotoActionCreator = (image) => {
 //! Action Creators загрузка фото пользователя
 export const setEditUserActionCreator = (user) => {
     return {
-        type: userAction.SET_EDIT_USER,
+        type: userAction.SET_EDIT,
         payload: user
     }
 }
