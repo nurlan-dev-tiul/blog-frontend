@@ -29,9 +29,9 @@ export const PaginationComponent = ({pages, categoryId, isCategory, pagesNumber,
                         )}
                     />
                 ) : (
-                    <Pagination 
+                    pagesNumber > 1 && <Pagination 
                         count={pagesNumber || 0}
-                        page={Number(pages) || 1}
+                        page={Number(pages) || 0}
                         variant="outlined" 
                         shape="rounded"
                         siblingCount={0}
@@ -44,7 +44,8 @@ export const PaginationComponent = ({pages, categoryId, isCategory, pagesNumber,
                             />
                         )}
                     />
-                )}
+
+                )}                    
                 
                 
             </Stack>

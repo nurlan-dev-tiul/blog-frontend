@@ -6,7 +6,8 @@ import { Post } from 'components/Posts/Post';
 import { UserInfo } from 'components/UserDetail/UserInfo';
 import {
     Container,
-    Content
+    Content,
+    NotPostText
 } from './Profile.styles';
 import { tabTitle } from 'utils/tabTitle';
 
@@ -33,16 +34,18 @@ const Profile = () => {
             <UserInfo {...user} id={id}/>
             <Container>
                 <Content>
-                    {user?.posts.map(post => (
-                        <Post 
-                            key={post._id}
-                            {...post}
-                            postId={post._id}
-                            userInfo={user}
-                            isAuthor={userDetails?._id === id}
-                        />
-                    ))}
-                    
+                    {user?.posts?.length <= 0 ? (
+                        <NotPostText>Записей нет</NotPostText>
+                    ) : (
+                        user?.posts?.map(post => (
+                            <Post 
+                                key={post._id}
+                                {...post}
+                                postId={post._id}
+                                userInfo={user}
+                                isAuthor={userDetails?._id === id}
+                            />
+                    )))}
                 </Content>
             </Container>
         </>

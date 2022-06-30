@@ -62,7 +62,7 @@ export const Post = React.memo((props) => {
                     {truncateString(title, 40, '...')}
                 </PostTitle>
                 <PostDescription>
-                    {truncateString(description, 180, '...')}
+                    {truncateString(description, 175, '...')}
                 </PostDescription>
                 <PostFooter>
                         {isAuthor ? (

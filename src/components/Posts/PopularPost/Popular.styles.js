@@ -124,9 +124,10 @@ export const DateBox = styled.div`
 export const Title = styled.h6`
     margin-top: ${props => props.postListGrid ? '10px' : '0px'};
     line-height: ${props => props.postListGrid ? null : '20px'};
+    color: ${props => props.postListGrid ? '#fff' : '#000'};
     padding-left: 15px;
     font-size: ${props => props.firstTitle ? '40px' : '17px'};
-    
+
     @media (max-width: 1125px) {
         font-size: ${props => props.firstTitle ? '25px' : '17px'};
         padding-left: 5px;
@@ -144,6 +145,15 @@ export const Title = styled.h6`
 export const PopularPost = styled.div`
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 1150px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+        gap: 10px;
+    } 
+    @media (max-width: 500px) {
+        grid-template-columns: 1fr;
+    } 
 `;
 
 export const Container = styled.div`
@@ -153,12 +163,13 @@ export const Container = styled.div`
 
 export const ImageWrapper = styled.div`
     width: 30%;
+    height: 67px;
 `;
 
 export const Content = styled.div`
     width: 70%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    line-height: 31px;
 `;
 

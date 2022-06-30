@@ -12,7 +12,7 @@ export const PostLikeAndView = styled.div`
     display: flex;
 
     @media (max-width: 630px) {
-        position: absolute;
+        position: ${props => props.positionBox ? 'unset' : 'absolute'};
         top: 0;
         margin-top: 15px;
     }

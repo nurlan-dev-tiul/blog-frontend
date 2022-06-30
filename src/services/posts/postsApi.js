@@ -15,6 +15,11 @@ export const getPostsApi= async (pages) => {
     return await apiClient.get(`/posts?page=${pages}`);
 }
 
+//! Получение популярных статей
+export const getPopularPostsApi= async () => {
+    return await apiClient.get('/posts/popular-posts');
+}
+
 //! Детальная статья
 export const getSinglePostApi= async (postId) => {
     return await apiClient.get(`/posts/${postId}`);

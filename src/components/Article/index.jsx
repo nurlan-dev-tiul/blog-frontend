@@ -34,6 +34,7 @@ export const Detail = (props) => {
                     date={createdAt}
                     likes={likes}
                     isLiked={isLiked}
+                    positionBox={true}
                 />
             </Infoline>
             <Content>

@@ -91,9 +91,6 @@ export const MenuLink = styled(Link)`
     display: flex;
     align-items: center;
 
-    @media (max-width: 600px) {
-        display: none;
-    }
 `;
 
 export const AuthIcon = styled(AccountCircleOutlinedIcon)`

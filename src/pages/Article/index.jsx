@@ -51,7 +51,7 @@ const ArticlePage = () => {
                 ))}
             </ArticleBox>
             <AsideBox>
-                <PopularPostList />
+                <PopularPostList postId={id} />
                 <Category />
             </AsideBox>
         </Wrapper>

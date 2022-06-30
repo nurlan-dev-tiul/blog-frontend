@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 export const UserWrapper = styled.div`
     display: flex;
 
-    @media (max-width: 834px) {
+    @media (max-width: 500px) {
         display: block;
         text-align: center;
         margin-top: 20px;
@@ -26,7 +26,7 @@ export const UserWrapper = styled.div`
 
 export const InfoWrapper = styled.div`
     display: flex;
-    @media (max-width: 834px) {
+    @media (max-width: 500px) {
         display: block;
         text-align: center;
         margin-top: 20px;
@@ -71,13 +71,18 @@ export const ProfileBox = styled.div`
         border-bottom-left-radius: 0px;
     }
     @media (max-width: 834px) {
-        width: 50%;
-        display: block;
-        height: 300px;
+        width: 80%;
+        height: 160px;
         bottom: 0px;
     }
     @media (max-width: 700px) {
         width: 90%;
+    }
+
+    @media (max-width: 500px) {
+        display: block;
+        bottom: 0;
+        height: ${props => props.isNotAuthor ? '230px' : '290px'};
     }
 
 `;
@@ -122,9 +127,9 @@ export const ProfileImg = styled.img`
 export const ProfileInfo = styled.div`
     margin-left: 30px;
     margin-right: 30px;
-
     display: flex;
     flex-direction: column;
+
     @media (max-width: 1100px) {
         margin-left: 10px;
         margin-right: 10px;
@@ -134,6 +139,10 @@ export const ProfileInfo = styled.div`
 export const UserInfoWrapper = styled.div`
     display: flex;
     align-items: center;
+
+    @media (max-width: 548px) {
+        display: block;
+    }
 `;
 
 export const FullName = styled(Typography)`
@@ -158,6 +167,10 @@ export const InfoText = styled(Typography)`
     font-weight: 500;
     margin-left: 10px;
     margin-top: 2px;
+
+    @media (max-width: 548px) {
+        margin-left: 0px;
+    }
 `;
 
 export const PostsLength = styled.div`
@@ -166,14 +179,15 @@ export const PostsLength = styled.div`
     display: flex;
     align-items: center;
 
-    @media (max-width: 834px) {
+    @media (max-width: 500px) {
         width: 100%;
         justify-content: center;
         position: absolute;
         bottom: 0px;
-        left: 0;
+        left: 5px;
         right: 0;
     }
+
 `;
 
 export const InfoBox = styled.div`
@@ -181,8 +195,9 @@ export const InfoBox = styled.div`
     align-items: center;
     margin-right: 10px;
     
-    @media (max-width: 834px) {
+    @media (max-width: 500px) {
         flex-direction: column;
+        padding-bottom: 10px;
     }
 `;
 

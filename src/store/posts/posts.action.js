@@ -2,7 +2,8 @@ import { closeAlertActionCreator, errorAlertActionCreator } from "store/alert/al
 import { 
     getPostsApi, 
     createPostApi, 
-    getPostsByCategoryApi, 
+    getPostsByCategoryApi,
+    getPopularPostsApi, 
     getSinglePostApi, 
     setPostLikesApi, 
     deletePostApi, 
@@ -16,7 +17,8 @@ import {
     setPostLikesActionCreators,
     deletePostActionCreator,
     editPostActionCreator,
-    loadingActionCreator
+    loadingActionCreator,
+    setPopularPostsActionCreator
 } from "./actions/action.creators";
 
 
@@ -45,6 +47,23 @@ export const getPostsAction = (pages) => async(dispatch, getState) => {
     try {
         const { data } = await getPostsApi(pages);
         dispatch(setAllPostsActionCreator(data));
+
+        if(showAlertMessage){
+            dispatch(closeAlertActionCreator());
+        }
+
+    } catch (error) {
+        dispatch(errorAlertActionCreator(error?.response?.data?.message))
+    }
+}
+
+
+//! Получение популярных постов
+export const getPopularPostsAction = () => async(dispatch, getState) => {
+    const { showAlertMessage } = getState().alert;
+    try {
+        const { data } = await getPopularPostsApi();
+        dispatch(setPopularPostsActionCreator(data));
 
         if(showAlertMessage){
             dispatch(closeAlertActionCreator());

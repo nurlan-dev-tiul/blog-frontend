@@ -2,7 +2,7 @@ import { postsAction } from "./action.types"
 
 //* Action creators
 
-//! Новый пост
+//! Loading
 export const loadingActionCreator = () => {
     return {
         type: postsAction.LOADING,
@@ -21,6 +21,14 @@ export const newPostActionCreator = (newPost) => {
 export const setAllPostsActionCreator = (posts) => {
     return {
         type: postsAction.SET_ALL_POSTS,
+        payload: posts
+    }
+}
+
+//! Популярные статьи
+export const setPopularPostsActionCreator = (posts) => {
+    return {
+        type: postsAction.SET_POPULAR_POSTS,
         payload: posts
     }
 }

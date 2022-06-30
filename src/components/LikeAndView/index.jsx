@@ -13,7 +13,7 @@ import {
     TimeIcon
 } from './LikeAndView.styles';
 
-export const LikeAndView = ({postId, numViews, date, likes}) => {
+export const LikeAndView = ({postId, numViews, date, likes, positionBox}) => {
 
     const [isLiked, setIsLiked] = React.useState(false);
 
@@ -32,7 +32,7 @@ export const LikeAndView = ({postId, numViews, date, likes}) => {
     }, [likes, postId, userDetails])
 
     return (
-        <PostLikeAndView>
+        <PostLikeAndView positionBox>
             <LikeBox>
                 {isLiked ? (
                     <IsLikedIcon onClick={handleLike} />

@@ -13,8 +13,11 @@ export const RecentPost = styled.div`
     display: flex;
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-top: 25px;
+
     @media (max-width: 991px) {
         height: auto;
+        display: block;
+        width: 100%;
     }
     @media (max-width: 835px) {
         display: block;
@@ -33,14 +36,8 @@ export const ImagePostBox = styled.div`
         width: 40%;
     }
     @media (max-width: 991px) {
-        width: 40%;
-        height: 300px;
-    }
-    @media (max-width: 930px) {
-        width: 40%;
-    }
-    @media (max-width: 835px) {
         width: 100%;
+        height: 300px;
     }
 `;
 
@@ -74,8 +71,8 @@ export const PostContent = styled.div`
         max-width: 60%;
     }
 
-    @media (max-width: 930px) {
-        max-width: 60%;
+    @media (max-width: 991px) {
+        max-width: 100%;
     }
 
     @media (max-width: 835px) {
@@ -122,6 +119,14 @@ export const PostFooter = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 1036px) {
+        padding-top: 20px;
+    }
+
+    @media (max-width: 991px) {
+        padding-top: 20px;
+    }
 `;
 
 export const PostUserBox = styled.div`

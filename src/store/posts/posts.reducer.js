@@ -2,6 +2,7 @@ import { postsAction } from "./actions/action.types"
 
 const initialState = {
     posts: [],
+    popularPosts: [],
     totalPages: null,
     limit: 0,
     post: null,
@@ -23,6 +24,12 @@ export const postsReducer = (state=initialState, action) => {
                 posts: action.payload.docs,
                 totalPages: action.payload.totalPages,
                 limit: action.payload.limit,
+                loading: false,
+            }
+        case postsAction.SET_POPULAR_POSTS:
+            return{
+                ...state,
+                popularPosts: action.payload,
                 loading: false,
             }
         case postsAction.SET_POST_LIKES:

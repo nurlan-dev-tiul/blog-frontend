@@ -42,7 +42,7 @@ export const UserInfo = React.memo((props) => {
     return (
         <Wrapper>
             <UserBackground src={UserBack} />
-            <ProfileBox>
+            <ProfileBox isNotAuthor={!isAuth}>
                 <UserWrapper>
                     <ProfileImgBox>
                         <Image src={profilePhoto} />

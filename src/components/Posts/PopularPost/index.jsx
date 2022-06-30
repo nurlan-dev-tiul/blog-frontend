@@ -1,5 +1,9 @@
 import React from 'react'
 import { Image } from 'styles/global';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPopularPostsAction } from 'store/posts/posts.action';
+import { dateFormat } from 'utils/momentDate';
+import { truncateString } from 'utils/withStrings/workingWithString';
 import {
     PopularPostGrid,
     PopularPost,
@@ -12,114 +16,59 @@ import {
     Title,
     Container,
     Content,
-    TitlePost,
-    Timestamp,
     ImageWrapper
 } from './Popular.styles';
+import { Link } from 'react-router-dom';
 
-const popular = [
-    {
-        title: 'Создали новый язык программирования',
-        date: '12.12.2022',
-        category: 'Программирование',
-        image: 'https://cdn.pixabay.com/photo/2022/01/13/10/24/dog-6934895_960_720.jpg'
-    },
-    {
-        title: 'Здоровое питание',
-        date: '12.12.2022',
-        category: 'Питание',
-        image: 'https://cdn.pixabay.com/photo/2022/05/05/21/16/transport-7177099_960_720.jpg'
-    },
-    {
-        title: 'Нарушение международного права. Смотри, не перепутай',
-        date: '12.12.2022',
-        category: 'Спорт',
-        image: 'https://cdn.pixabay.com/photo/2014/12/16/22/25/woman-570883_960_720.jpg'
-    },
-    {
-        title: 'Нарушение международного права. Смотри, не перепутай',
-        date: '12.12.2022',
-        category: 'Путешествие',
-        image: 'https://cdn.pixabay.com/photo/2017/06/05/11/01/airport-2373727_960_720.jpg'
-    },
-    {
-        title: 'Нарушение международного права. Смотри, не перепутай',
-        date: '12.12.2022',
-        category: 'Программирование',
-        image: 'https://cdn.pixabay.com/photo/2017/11/26/15/16/smiley-2979107_960_720.jpg'
-    },
-]
+export const PopularPostList = ({postListGrid, postId}) => {
 
-export const PopularPostList = ({postListGrid}) => {
+    const dispatch = useDispatch();
+    const { popularPosts } = useSelector(state => state.posts)
+
+    React.useEffect(() => {
+        dispatch(getPopularPostsAction());
+    }, [dispatch]);
+
     return (
         <>
             {postListGrid ? (
                 <PopularPostGrid>
-                    {popular?.map((item, index) => (
-                        <ImageBox key={index}>
-                            <Image src={item.image} />
+                    {popularPosts?.map((popular, index) => (
+                        <ImageBox key={popular?._id}>
+                            <Image src={popular?.image} />
                             <Overlay>
                                 <InfoPost firstTitle={index === 0}>
                                     <CategoryDateBox>
-                                        <CategoryBox>{item.category}</CategoryBox>
-                                        <DateBox postListGrid>{item.date}</DateBox>
+                                        <CategoryBox>{popular?.category?.title}</CategoryBox>
+                                        <DateBox postListGrid>{dateFormat(popular?.createdAt)}</DateBox>
                                     </CategoryDateBox>
-                                    <Title firstTitle={index === 0} postListGrid>
-                                        {item.title}
-                                    </Title>
+                                    <Link to={`/detail/${popular?._id}`}>
+                                        <Title postListGrid firstTitle={index  === 0}>
+                                            {truncateString(popular?.title, 50, '...')}
+                                        </Title>
+                                    </Link>
                                 </InfoPost>
                             </Overlay>
                         </ImageBox>
                     ))}
+                    
                 </PopularPostGrid>
             ) : (
                 <PopularPost>
-                    <Container>
-                        <ImageWrapper>
-                            <Image src='https://cdn.pixabay.com/photo/2022/01/13/10/24/dog-6934895_960_720.jpg' />
-                        </ImageWrapper>
-                        <Content>
-                            <Title>Победители «Евровидения»...</Title>
-                            <DateBox>22.12.2021</DateBox>
-                        </Content>
-                    </Container>
-                     <Container>
-                        <ImageWrapper>
-                            <Image src='https://cdn.pixabay.com/photo/2022/04/18/13/27/yoga-7140566_960_720.jpg' />
-                        </ImageWrapper>
-                        <Content>
-                            <Title>Группа Kalush Orchestra опубликовала клип на ...</Title>
-                            <DateBox>22.12.2021</DateBox>
-                        </Content>
-                    </Container>
-                    <Container>
-                        <ImageWrapper>
-                            <Image src='https://cdn.pixabay.com/photo/2022/01/13/10/24/dog-6934895_960_720.jpg' />
-                        </ImageWrapper>
-                        <Content>
-                            <Title>The Best Indoor Plants To Create Comfort ...</Title>
-                            <DateBox>22.12.2021</DateBox>
-                        </Content>
-                    </Container>
-                    <Container>
-                        <ImageWrapper>
-                            <Image src='https://cdn.pixabay.com/photo/2022/01/13/10/24/dog-6934895_960_720.jpg' />
-                        </ImageWrapper>
-                        <Content>
-                            <Title>The Best Indoor Plants To Create Comfort ...</Title>
-                            <DateBox>22.12.2021</DateBox>
-                        </Content>
-                    </Container>
-                    <Container>
-                        <ImageWrapper>
-                            <Image src='https://cdn.pixabay.com/photo/2022/01/13/10/24/dog-6934895_960_720.jpg' />
-                        </ImageWrapper>
-                        <Content>
-                            <Title>The Best Indoor Plants To Create Comfort ...</Title>
-                            <DateBox>22.12.2021</DateBox>
-                        </Content>
-                    </Container>
-                </PopularPost>
+                    {popularPosts?.map((popular) => (
+                        <Container key={popular?._id}>
+                            <ImageWrapper>
+                                <Image src={popular?.image} />
+                            </ImageWrapper>
+                            <Content>
+                                <Link to={`/detail/${popular?._id}`}>
+                                    <Title>{truncateString(popular?.title, 23, '...')}</Title>
+                                </Link>
+                                <DateBox>{dateFormat(popular?.createdAt)}</DateBox>
+                            </Content>
+                        </Container>
+                    ))}
+                </PopularPost>   
             )}
         </>
     )
