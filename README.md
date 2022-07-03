@@ -10,7 +10,6 @@
 - Axios
 - Moment
 - Material UI/Emotion 
-- Cloudinary API
 
 ## Какие технологии используются на сервере:
 Можете посмотреть [тут](https://github.com/nurlan-dev-tiul/blog-backend)
@@ -35,7 +34,6 @@
 
 
 =======
-- Разделение кода на основе маршрутов ( Lazy, Suspense )
 >>>>>>> 86dc8ab (cloudinary-api)
 
 
