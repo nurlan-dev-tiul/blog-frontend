@@ -38,6 +38,7 @@ export const Post = React.memo((props) => {
         isAuthor, 
         category, 
         postLikes,
+        authorPost
     } = props;
 
     const dispatch = useDispatch();
@@ -64,7 +65,7 @@ export const Post = React.memo((props) => {
                 <PostDescription>
                     {truncateString(description, 175, '...')}
                 </PostDescription>
-                <PostFooter>
+                <PostFooter authorPost={authorPost}>
                         {isAuthor ? (
                             <PostUserBox>
                                 <EditIcon onClick={() => setOpenModal(true)} />
@@ -72,7 +73,7 @@ export const Post = React.memo((props) => {
                             </PostUserBox>
                             
                         ) : (
-                            <PostUserBox>
+                            <PostUserBox authorPost={authorPost}>
                                 <AuthorImageBox>
                                     <AuthorImage src={user?.profilePhoto} />
                                 </AuthorImageBox>
@@ -88,6 +89,7 @@ export const Post = React.memo((props) => {
                         likes={likes} 
                         isLiked={isLiked}
                         postLikes={postLikes}
+                        authorPost={authorPost}
                     />
                 </PostFooter>
             </PostContent>

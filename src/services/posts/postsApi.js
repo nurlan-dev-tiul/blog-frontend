@@ -37,7 +37,7 @@ export const editPostApi= async (id, post) => {
 
 //! Редактирование статьи Image
 export const editImagePostApi= async (id, image) => {
-    return await apiClient.put(`/posts/update-image/${id}`, image);
+    return await apiClient.put(`/posts/image/${id}`, {image});
 }
 
 //! Удаление статьи

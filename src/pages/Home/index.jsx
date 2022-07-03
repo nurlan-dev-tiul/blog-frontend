@@ -3,6 +3,7 @@ import { PostLayout } from 'components/Posts/PostLayout';
 import { useSearchParams } from 'react-router-dom';
 import { Posts } from 'components/Posts';
 import { tabTitle } from '../../utils/tabTitle';
+import { PopularPostList } from 'components/Posts/PopularPost';
 
 const Home = () => {
     const [searchParams] = useSearchParams();
@@ -11,9 +12,12 @@ const Home = () => {
     tabTitle('Статьи')
 
     return (
-        <PostLayout>
-            <Posts pages={pages} />
-        </PostLayout>
+        <>
+            <PopularPostList postListGrid />
+            <PostLayout scrollAmount={549}>
+                <Posts pages={pages} />
+            </PostLayout>
+        </>
     )
 }
 

@@ -11,6 +11,7 @@ export const PopularPostGrid = styled.section`
     grid-auto-rows: 250px;
     grid-auto-flow: dense;
     grid-gap: 25px;
+    margin-top: 25px;
     
     @media (max-width: 640px) {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

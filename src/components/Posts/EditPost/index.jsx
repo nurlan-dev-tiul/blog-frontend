@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormInput } from 'components/FormInput';
@@ -21,11 +22,12 @@ import {
 export const EditPost = ({id, image, title, description, selectedModalClose}) => {
         const [img, setImage] = React.useState(null);
         const [previewImg, setPreviewImg] = React.useState(null);
+        const [loadingImg, setLoadingImg] = React.useState(false);
 
         const dispatch = useDispatch();
 
         const { categories } = useSelector(state => state.category);
-        const { editedPost, loading } = useSelector(state => state.posts);
+        const { editedPost } = useSelector(state => state.posts);
 
         //! React-hook-form и схема валидации
         const form = useForm({
@@ -46,10 +48,23 @@ export const EditPost = ({id, image, title, description, selectedModalClose}) =>
         }
 
         //! Отправляем картинку на сервер
-        const uploadImage = () => {
-            const formData = new FormData();
-            formData.append('image', img);
-            dispatch(editImagePostAction(id, formData));
+        const uploadImage = async () => {
+            try {
+                setLoadingImg(true)
+                const cloudName = 'de1uvccij'
+                const formData = new FormData();
+    
+                formData.append('file', img);
+                formData.append('upload_preset', 'mern-blog') //? Это папка куда будут сохраняться img в cloudinary
+                formData.append('cloud_name', cloudName) //? cloud name из cloudinary
+                
+                const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData)
+
+                setLoadingImg(false)
+                dispatch(editImagePostAction(id, data.url));
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         //! Отправляем на сервер отредактированную статью
@@ -106,7 +121,7 @@ export const EditPost = ({id, image, title, description, selectedModalClose}) =>
                                 component="span"
                                 onClick={uploadImage}
                             >
-                                {loading ? 'Идет загрузка ...' : 'Сохранить'}
+                                {loadingImg ? 'Идет загрузка ...' : 'Сохранить'}
                             </Button> }
                     </InputContainer> 
                 </ImageContainer>

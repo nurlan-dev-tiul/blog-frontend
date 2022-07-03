@@ -23,11 +23,10 @@ export const getUserAction = (userId) => async (dispatch, getState) => {
 //! Загрузка фото пользователя
 export const addProfilePhotoAction = (avatar) => async (dispatch, getState) => {
     const { showAlertMessage } = getState().alert;
-    const formData = new FormData();
-    formData.append('image', avatar);
+
     try {
         dispatch(setLoading())
-        const { data } = await addUserPhotoApi(formData);
+        const { data } = await addUserPhotoApi(avatar);
         //! Dispatch in store
         dispatch(setPhotoActionCreator(data));
 

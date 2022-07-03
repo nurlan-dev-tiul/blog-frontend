@@ -7,6 +7,7 @@ import { logoutAction } from 'store/auth/auth.action';
 import { Button } from '@mui/material';
 import { Image } from 'styles/global';
 import { Category } from 'components/Category';
+import { scrollToUp } from 'utils/scrollToElement';
 import { AuthorImageBox } from '../Header/Header.styles';
 import {
     LinkItem,
@@ -17,6 +18,7 @@ import {
 	UserContainer,
 	CategoryContainer,
 } from './ProfileMenu.styles';
+
 
 export const ProfileMenu = ({anchor, onClose, responsiveMenu, openMenu, handleCloseMenu}) => {
 
@@ -40,6 +42,12 @@ export const ProfileMenu = ({anchor, onClose, responsiveMenu, openMenu, handleCl
     const createPostLink = () => {
         navigate('/create-post')
         handleCloseMenu();
+    }
+
+    //! При клике на меню категории будет скроллить вверх к первой статье и закрываться меню
+    const handleScrollToPost = () => {
+        handleCloseMenu()
+        scrollToUp()
     }
 
     //! UI для маленьких экранов
@@ -75,7 +83,7 @@ export const ProfileMenu = ({anchor, onClose, responsiveMenu, openMenu, handleCl
                 </ResponseCreateBTN>
                 ) : null}
                 <CategoryContainer>
-                    <Category responsive />
+                    <Category responsive handleScrollToPost={handleScrollToPost} />
                 </CategoryContainer>
             </ResponseMenuBox>
         )

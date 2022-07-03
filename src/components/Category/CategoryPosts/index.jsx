@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PaginationComponent } from 'components/Pagination';
 import { getPostsByCategoryAction } from 'store/posts/posts.action';
 import { Post } from 'components/Posts/Post';
+import { scrollToElement } from 'utils/scrollToElement';
 import {
     NotPostsText
 } from '../Category.styles'
-
 
 export const CategoryPosts = ({categoryId, pages}) => {
 
@@ -27,7 +27,7 @@ export const CategoryPosts = ({categoryId, pages}) => {
 
     //! При клике на пагинацию будет скролиться на первую статью сверху
     const scrollToElementHandle = () => {
-        scrollToElementRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        scrollToElement(scrollToElementRef)
     }
 
     return (

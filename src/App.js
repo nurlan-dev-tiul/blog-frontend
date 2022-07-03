@@ -7,7 +7,7 @@ import {
 import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Global } from '@emotion/react';
 import { Layout } from "components/Layout";
 import { GlobalStyle } from "styles/global";
@@ -24,10 +24,14 @@ const CategoryPage = React.lazy(() => import('pages/Category'));
 
 const App = () => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector(state => state.auth)
 
   React.useEffect(() => {
-    dispatch(getProfileAction())
+    const user = localStorage.getItem('userBlog');
+    if(user){
+      dispatch(getProfileAction())
+    }
   }, [dispatch])
 
   return (

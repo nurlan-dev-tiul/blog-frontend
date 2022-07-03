@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const MainContainer = styled.div`
-    margin-top: 25px;
+
 `;
 
 export const PostsBox = styled.div`

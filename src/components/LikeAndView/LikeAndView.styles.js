@@ -10,11 +10,13 @@ const { gray } = colors;
 
 export const PostLikeAndView = styled.div`
     display: flex;
+    align-items: center;
 
     @media (max-width: 630px) {
         position: ${props => props.positionBox ? 'unset' : 'absolute'};
         top: 0;
-        margin-top: 15px;
+        left: 10;
+        margin-top: ${props => props.positionBox ? '0px' : '20px'};
     }
 `;
 
@@ -28,6 +30,11 @@ export const LikeIcon = styled(FavoriteBorderIcon)`
     font-size: 22px;
     cursor: pointer;
     color: ${gray};
+
+    /* @media (max-width: 630px) {
+        color: ${props => props.positionBox ? '#fff' : `${gray}`};
+    } */
+
 `;
 
 export const IsLikedIcon = styled(FavoriteIcon)`

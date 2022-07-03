@@ -44,6 +44,7 @@ const Profile = () => {
                                 postId={post._id}
                                 userInfo={user}
                                 isAuthor={userDetails?._id === id}
+                                authorPost={true}
                             />
                     )))}
                 </Content>

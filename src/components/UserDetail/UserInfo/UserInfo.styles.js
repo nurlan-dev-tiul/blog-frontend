@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     height: 290px;
     position: relative;
     width: 100%;
+
     @media (max-width: 980px) {
         height: auto;
     }
@@ -59,8 +60,14 @@ export const ProfileBox = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    @media (max-width: 1250px) {
-        width: 80%;
+    
+
+    @media (max-width: 1150px) {
+        width: 90%;
+    }
+
+    @media (max-width: 1075px) {
+        width: 95%;
     }
 
     @media (max-width: 980px) {
@@ -69,6 +76,7 @@ export const ProfileBox = styled.div`
         border-top-right-radius: 22px;
         border-bottom-right-radius: 0px;
         border-bottom-left-radius: 0px;
+        width: 80%;
     }
     @media (max-width: 834px) {
         width: 80%;

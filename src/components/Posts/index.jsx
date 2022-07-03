@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PaginationComponent } from 'components/Pagination';
 import { getPostsAction } from 'store/posts/posts.action';
 import { Post } from './Post';
+import { scrollToElement } from 'utils/scrollToElement';
 
 export const Posts = ({pages}) => {
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export const Posts = ({pages}) => {
 
     //! При клике на пагинацию будет скролиться на первый элемент сверху
     const scrollToElementHandle = () => {
-        scrollToElementRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        scrollToElement(scrollToElementRef)
     }
 
     return (

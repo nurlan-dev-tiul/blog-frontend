@@ -37,6 +37,10 @@ export const PostAuthor = styled.span`
     ${authorMixin};
     margin-left: 10px;
     margin-right: 10px;
+
+    @media (max-width: 431px) {
+        display: none;
+    }
 `;
 
 export const Content = styled.div`

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
+
 import {
     StepBody,
     Container,
@@ -21,7 +22,7 @@ export const UploadImageStep = () => {
     const { formState, register } = useFormContext();
 
     //! Функция для превью картинки
-    const handleChange =  (e) => {
+    const handleChange = (e) => {
         const selectedFile = e.target.files[0];
         const previewImage = URL.createObjectURL(selectedFile);
         setPreviewImg(previewImage);

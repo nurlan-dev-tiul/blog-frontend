@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
@@ -23,9 +24,10 @@ export const EditProfile = ({firstName, image, email, selectedValueClose}) => {
 
     const [avatar, setAvatar] = React.useState(null);
     const [previewImg, setPreviewImg] = React.useState(null);
+    const [imageLoading, setImageLoading] = React.useState(false)
     
     const dispatch = useDispatch();
-    const { editSuccess, loading } = useSelector(state => state.user);
+    const { editSuccess } = useSelector(state => state.user);
 
     //! React-hook-form и схема валидации
     const form = useForm({
@@ -46,8 +48,23 @@ export const EditProfile = ({firstName, image, email, selectedValueClose}) => {
     }
 
     //! Отправка аватарки на сервер
-    const createAvatar = () => {
-        dispatch(addProfilePhotoAction(avatar));
+    const createAvatar = async () => {
+        try {
+            setImageLoading(true)
+            const cloudName = 'de1uvccij'
+            const formData = new FormData();
+
+            formData.append('file', avatar);
+            formData.append('upload_preset', 'mern-blog') //? Это папка куда будут сохраняться img в cloudinary
+            formData.append('cloud_name', cloudName) //? cloud name из cloudinary
+            
+            const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData)
+            
+            dispatch(addProfilePhotoAction(data.url));
+            setImageLoading(false)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     //! Обновление данных пользователя
@@ -66,7 +83,7 @@ export const EditProfile = ({firstName, image, email, selectedValueClose}) => {
         if(editSuccess){
             selectedValueClose();
         }
-    }, [editSuccess])
+    }, [editSuccess, selectedValueClose])
 
     return (
         <ModalBox>
@@ -90,7 +107,7 @@ export const EditProfile = ({firstName, image, email, selectedValueClose}) => {
                                         variant='contained'
                                         onClick={createAvatar}
                                     >
-                                        {loading ? 'Загрузка' : 'Сохранить'}
+                                        {imageLoading ? 'Загрузка' : 'Сохранить'}
                                     </SaveImgBTN>
                             ) : (
                             <IconButton color="primary" aria-label="upload picture" component="span">

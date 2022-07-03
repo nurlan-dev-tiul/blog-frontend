@@ -1,5 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,11 +19,10 @@ import {
 
 const CreatePost = () => {
 
-    const [step, setStep] = React.useState(0);
+    const [step, setStep] = React.useState(0); 
+    const [loading, setLoading] = React.useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const { loading } = useSelector(state => state.posts);
 
     //! Change Document Title function
     tabTitle('Новая запись')
@@ -59,14 +59,30 @@ const CreatePost = () => {
     }
 
     //! Отправка данных на сервер
-    const createPost = (data) => {
-        const formData = new FormData();
-        formData.append('title', data.title);
-        formData.append('description', data.description);
-        formData.append('category', data.category);
-        formData.append('image', data.image[0]);
+    const createPost = async (dataPost) => {
+        try {
+            setLoading(true)
+            const cloudName = 'de1uvccij'
+            const formData = new FormData();
 
-        dispatch(createPostAction(formData, navigate))
+            formData.append('file', dataPost?.image[0]);
+            formData.append('upload_preset', 'mern-blog') //? Это папка куда будут сохраняться img в cloudinary
+            formData.append('cloud_name', cloudName) //? cloud name из cloudinary
+            
+            const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData)
+
+            const dataObj = {
+                title: dataPost.title,
+                description: dataPost.description,
+                category: dataPost.category,
+                image: data.url
+            }
+
+            setLoading(false)
+            dispatch(createPostAction(dataObj, navigate))
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

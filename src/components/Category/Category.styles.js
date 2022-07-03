@@ -8,6 +8,7 @@ export const CategoryBox = styled.div`
     @media (max-width: 1152px) {
         position: static;
     }
+    
 `;
 
 export const UlCategory = styled.ul`
@@ -20,6 +21,9 @@ export const ListCategory = styled.li`
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
     list-style: none; 
     margin-bottom: ${props => props.responsive ? '0px' : '1.4rem'};
+    @media (max-width: 600px) {
+        display: ${props => props.responsive ? 'block' : 'none'}
+    }
 `;
 
 export const CategItem = styled(Link)`

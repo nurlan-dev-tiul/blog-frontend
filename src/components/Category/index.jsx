@@ -8,7 +8,7 @@ import {
     CategItem,
 } from './Category.styles';
 
-export const Category = ({responsive}) => {
+export const Category = ({responsive, handleScrollToPost, scrollAmount}) => {
 
     const dispatch = useDispatch();
     const [scroll, setScroll] = React.useState(0);
@@ -30,11 +30,11 @@ export const Category = ({responsive}) => {
 	}, []);
 
     return (
-        <CategoryBox style={scroll > 549 ? {top: '110px'} : {top: '0px'}}>
+        <CategoryBox style={scroll > scrollAmount ? {top: '110px'} : {top: '0px'}}>
             <UlCategory>
                 {
                     categories?.map((category, index) => (
-                    <ListCategory key={index} responsive={responsive}>
+                    <ListCategory key={index} responsive={responsive} onClick={handleScrollToPost}>
                         <CategItem to={`/category/${category._id}`}>
                             {category.title}
                         </CategItem>

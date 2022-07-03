@@ -97,6 +97,11 @@ export const PostTitle = styled(Link)`
     @media (max-width: 930px) {
         font-size: 20px;
     }
+
+    @media (max-width: 630px) {
+        display: block;
+        margin-top: 15px;
+    }
         
 `;
 
@@ -113,7 +118,7 @@ export const PostDescription = styled.p`
 `;
 
 export const PostFooter = styled.div`
-    padding-top: 20px;
+    padding-top: ${props => props.authorPost ? '30px' : '20px'};
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
