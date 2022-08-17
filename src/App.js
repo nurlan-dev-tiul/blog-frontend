@@ -10,7 +10,7 @@ import NotFound from "pages/NotFound";
 import { useDispatch, useSelector } from "react-redux";
 import { Global } from '@emotion/react';
 import { Layout } from "components/Layout";
-import { GlobalStyle } from "styles/global";
+import { GlobalStyle, LoadContainer } from "styles/global";
 import { PrivateRoute } from "components/PrivateRoute";
 import { getProfileAction } from "store/auth/auth.action";
 import { Loading } from "components/Loading";
@@ -25,14 +25,36 @@ const CategoryPage = React.lazy(() => import('pages/Category'));
 const App = () => {
 
   const dispatch = useDispatch();
-  const { isAuth } = useSelector(state => state.auth)
+  const { isAuth } = useSelector(state => state.auth);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const user = localStorage.getItem('userBlog');
     if(user){
       dispatch(getProfileAction())
     }
-  }, [dispatch])
+  }, [dispatch]);
+
+  //! Прелоадер
+	React.useEffect(() => {
+		// Loading function to load data or 
+		// fake it using setTimeout;
+		const loadData = async () => {
+	
+		  // Wait for two second
+			await new Promise((r) => setTimeout(r, 2000));
+	
+		  // Toggle loading state
+			setLoading((loading) => !loading);
+		};
+		loadData();
+	}, [])
+
+	if (loading) {
+        return <LoadContainer>
+          <Loading />
+        </LoadContainer>  
+    }
 
   return (
     <>

@@ -11,7 +11,7 @@ export const GlobalStyle = css`
         text-decoration: none;
     }
     body{
-
+        position: relative;
     }
 `;
 
@@ -23,6 +23,14 @@ export const Wrapper = styled.div`
         position: relative;
     }
 `;
+
+export const LoadContainer = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px !important;
+    transform: translate(-50%, -50%);
+`
 
 export const AsideBox = styled.div`
     width: 25%;
