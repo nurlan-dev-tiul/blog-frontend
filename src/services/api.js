@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const apiClient = axios.create({
-    baseURL: 'https://app-blog-mern.herokuapp.com/api',
+    baseURL: 'https://blog-backend-xe22.onrender.com/api',
 });
 // https://app-blog-mern.herokuapp.com/api
 // http://localhost:5000/api
